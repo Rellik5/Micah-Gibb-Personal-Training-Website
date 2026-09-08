@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FILL: appears in the browser tab and in Google results -->
+<title class="todo">[Trainer name] [What they do] [City]</title>
+<meta name="description" content="[One sentence, under 155 characters, that says who this is for]">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand todo" href="#">[Name or business name]</a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+
+    <nav class="nav" id="nav">
+      <a href="#work">What I do</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <!-- One statement. Not a slogan. Say what you do and who for. -->
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="todo">[One sentence, 6 to 12 words]</h1>
+      <div class="hero__rule"></div>
+      <p class="lede todo">[Two sentences. Who this is for and what happens first.]</p>
+      <div class="hero__actions">
+        <a class="btn" href="#contact">Book a first session</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT I DO ============ -->
+  <!-- Three is a good number. Delete a block if you only have two. -->
+  <section class="section section--band" id="work">
+    <div class="wrap">
+      <h2 class="todo">[Section heading]</h2>
+
+      <div class="grid">
+        <div class="item">
+          <h3 class="todo">[Thing one]</h3>
+          <p class="todo">[Two or three sentences.]</p>
+        </div>
+
+        <div class="item">
+          <h3 class="todo">[Thing two]</h3>
+          <p class="todo">[Two or three sentences.]</p>
+        </div>
+
+        <div class="item">
+          <h3 class="todo">[Thing three]</h3>
+          <p class="todo">[Two or three sentences.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="wrap two-col">
+      <div>
+        <h2 class="todo">[Section heading]</h2>
+        <div class="prose">
+          <p class="todo">[Who they are. Plain language.]</p>
+          <p class="todo">[How they got here and why it matters to a client.]</p>
+        </div>
+      </div>
+
+      <!-- FILL: real photo of the trainer. Delete this block if there is none. -->
+      <div class="photo todo">[Photo of the trainer]</div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section section--band" id="contact">
+    <div class="wrap two-col">
+      <div>
+        <h2 class="todo">[Section heading]</h2>
+        <div class="prose">
+          <p class="todo">[What happens after someone sends this. Set the expectation.]</p>
+          <p class="contact-direct todo">
+            [email address]<br>
+            [phone number]
+          </p>
+        </div>
+      </div>
+
+      <!-- FILL: paste your Formspree endpoint into action= -->
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="goal">What are you hoping to work on?</label>
+          <textarea id="goal" name="goal" rows="5" required></textarea>
+        </div>
+
+        <input type="text" name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="btn" type="submit">Send message</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p class="todo">[Business name] [City, State]</p>
+    <p>&copy; <span id="year">2026</span></p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
