@@ -1,4 +1,4 @@
-# Trainer site
+# Micah Gibb, coaching site
 
 Five-page static site. No build step, no dependencies.
 
@@ -7,11 +7,11 @@ trainer-site/
   index.html      home, photo hero and pinned scroll
   about.html
   pricing.html
-  schedule.html   booking embed and request form
+  schedule.html   three booking types, calendar embed, request form
   contact.html
   styles.css      shared, tokens at the top
   main.js         shared, nav + reveals + forms
-  assets/         images
+  assets/         photos
 ```
 
 ## Run it locally
@@ -23,112 +23,135 @@ python3 -m http.server 8000
 
 Open http://localhost:8000
 
-## Replacing the images
+## Anything in square brackets is unfinished
 
-`assets/` currently holds labeled placeholders. Drop your real photos in with
-the same filenames and the site picks them up with no code changes.
+Placeholders are written as `[like this]` so they are impossible to miss and
+easy to grep. Nothing factual about Micah was invented. Run this to see what
+is still outstanding:
 
-| File | Size | What it is |
+```bash
+grep -rn '\[' *.html
+```
+
+The list right now:
+
+- Email, phone, gym name, street address, city and training hours
+- Certification, continuing education, first aid status, insurance
+- Year he started coaching
+- Every price, session length and check-in frequency
+- The About page story, which is the one section nobody else can write
+- Two FAQ answers on cancellation and commitment
+- The nutrition scope answer, which depends on his qualifications
+
+Descriptive copy is written and reads as finished. Treat it as a draft in his
+voice, not as fact. Anything that makes a claim about him is bracketed.
+
+## Palette
+
+From the iColorPalette set, mapped in `:root` at the top of `styles.css`.
+
+| Token | Hex | Used for |
 |---|---|---|
-| `hero.jpg` | 2400 x 1400 | Home page hero. Wide, and leave room at the bottom because text sits over it. |
-| `story.jpg` | 1400 x 1700 | Tall. Stays pinned while text scrolls past. |
-| `coach.jpg` | 1200 x 1500 | Portrait, About page. |
-| `gallery-1.jpg` | 1000 x 1250 | Facility or equipment. |
-| `gallery-2.jpg` | 1000 x 1250 | A client mid-set. |
-| `gallery-3.jpg` | 1000 x 1250 | Detail shot. |
+| `--ink` | `#063937` | Body text, dark sections, hero scrim |
+| `--teal` | `#185e55` | Secondary |
+| `--blue` | `#068cdf` | Accent rules, step numbers, list markers |
+| `--blue-deep` | `#03578b` | Links and buttons |
+| `--sky` | `#8ec0e0` | Text on dark backgrounds |
+| `--sand` | `#d9cec4` | Warm section bands |
 
-Two things worth doing before you upload them:
+`#068cdf` only reaches 3.6:1 against white, which fails the accessibility
+minimum for body text. So it is used for decoration and large bold numbers,
+where 3:1 is the bar, and `--blue-deep` at 7.7:1 carries anything that is
+actually text. If you swap the accent, keep that split.
 
-Compress them. Run them through squoosh.app and target under 300KB each. A
-2MB hero photo will undo everything good about a site with no framework.
+The warm band redefines `--line` and `--muted` inside its own scope, so
+borders and secondary text on sand pick up warmer tones without extra rules.
 
-Update the `alt` text on every image to describe what is actually in your
-photo. It is what screen readers announce and what Google reads.
+## Photos
+
+| File | Source | Slot |
+|---|---|---|
+| `hero.jpg` | deadlift pull | Home hero |
+| `story.jpg` | deadlift lockout | Pinned scroll section |
+| `coach.jpg` | portrait in cap | About |
+| `gallery-1.jpg` | squat rack | Gallery |
+| `gallery-2.jpg` | pitching | Gallery |
+| `gallery-3.jpg` | fly fishing | Gallery |
+
+All cropped to their slot's aspect ratio around a focal point, then compressed
+to under 300KB each. The pitching shot in the purple jersey went unused.
+
+To swap one, drop a replacement in with the same filename. If the crop looks
+wrong, adjust `object-position` on that image in `styles.css` rather than
+re-cropping the file.
+
+Update the `alt` text whenever a photo changes. It is what screen readers
+announce and what Google reads.
 
 ## How the scroll effects work
 
 Three separate things, all of which degrade cleanly.
 
 **Hero drift.** The hero photo shifts slightly as you scroll. Pure CSS using
-`animation-timeline: scroll()`, wrapped in an `@supports` block. Browsers
-without it show a still photo and nothing breaks.
+`animation-timeline: scroll()`, wrapped in `@supports`. Browsers without it
+show a still photo.
 
-**Pinned story section.** On the home page the tall photo sticks in place
-while three text blocks scroll past it. This is `position: sticky` plus a
-large gap between blocks. On screens under 52rem it stacks normally, because
-sticky on a phone just wastes the screen.
+**Pinned story section.** The tall photo sticks in place while three text
+blocks scroll past. `position: sticky` plus a large gap between blocks. Under
+52rem it stacks normally, because sticky on a phone wastes the screen.
 
-**Fade-ins.** Anything with `class="reveal"` fades up when it enters view,
-driven by IntersectionObserver in `main.js`. Add `style="--delay: 90ms"` to
-stagger a group. Content is visible by default and only hidden once JavaScript
-confirms it is running, so a JS failure never leaves a blank page. Anyone with
-reduced motion turned on sees everything immediately.
+**Fade-ins.** Anything with `class="reveal"` fades up on entry, driven by
+IntersectionObserver in `main.js`. Add `style="--delay: 90ms"` to stagger a
+group. Content is visible by default and only hidden once JavaScript confirms
+it is running, so a script failure never leaves a blank page. Reduced motion
+turns it all off.
 
-To add the effect to a new element, put `reveal` in its class list. That is all.
+## Wiring up the calendar
 
-## Wiring up the booking calendar
+The schedule page describes three bookable things: intro call, training
+session, and check-in. The `.embed` div is waiting for a calendar.
 
-The schedule page has an empty `.embed` div waiting for a calendar.
-
-1. Set up a Calendly or Acuity account and create your event type
-2. Copy the inline embed snippet they give you
+1. Create three event types in Calendly or Acuity matching those three
+2. Copy the embed code for your **profile page**, not a single event type,
+   so all three show up in one calendar
 3. Paste it inside the `.embed` div on `schedule.html`, replacing the
    placeholder paragraph
 4. Delete the `border` and `place-items` lines from the `.embed` rule in
    `styles.css` so it stops looking like a placeholder
 
-Acuity handles payments and packages better if you plan to sell session
-blocks. Calendly is simpler and free for a single event type.
+Acuity handles payments and packages better if he plans to sell session
+blocks. Calendly is simpler and free for a single event type, though three
+event types needs a paid tier.
 
 ## Wiring up the forms
 
 The schedule and contact pages both post to Formspree.
 
 1. Create a form at formspree.io
-2. Paste the endpoint into the `action` attribute on `<form id="contact-form">`
+2. Paste the endpoint into `action` on `<form id="contact-form">`
 3. Do this on both `schedule.html` and `contact.html`
 
 The hidden `_gotcha` field is a spam trap. Leave it alone.
 
-## Things to swap before launch
-
-Search all five files for `SWAP`, plus:
-
-- Coach name in every `<title>`, the `.brand` link, and the footer
-- Email and phone on `schedule.html`, `contact.html`, and in `main.js`
-- Address and hours on `contact.html`
-- Prices and what each plan includes on `pricing.html`
-- The testimonial on `index.html`, or delete that section until a real one exists
-- Every `alt` attribute once the real photos are in
-
 ## Maintaining five pages by hand
 
-The header and footer are duplicated in all five files, marked with
-`SHARED HEADER` and `SHARED FOOTER` comments. Change one, change all five.
-
-The active nav link is marked with `aria-current="page"` on that page's own
-link. If you add a page, remember to add it to both nav blocks in all files.
+The header and footer are duplicated in all five files. Change one, change all
+five. The active nav link is marked with `aria-current="page"` on that page's
+own link, which drives the underline and tells screen readers where you are.
 
 This is the one real cost of skipping a build step. It is manageable at five
-pages and it stops being manageable somewhere around eight.
+pages and stops being manageable around eight.
 
 ## When to move to Astro
 
 Adding a blog, or hitting eight or more pages, or getting tired of editing the
 nav five times. Astro takes this HTML and CSS as-is, so nothing gets thrown
 away. What you gain is layouts, which puts the header and footer in one file.
-Roughly an afternoon of work.
+Roughly an afternoon.
 
-Things that do **not** require moving: booking (embed), payments (Stripe
-Payment Links), more images, more sections. Those all fit here.
+Things that do **not** require moving: the calendar (embed), payments (Stripe
+Payment Links), more photos, more sections.
 
 The only genuine rebuild is a client portal with logins and progress tracking.
-That needs a real backend and a database, and it is worth waiting until paying
-clients are asking for it.
-
-## Design tokens
-
-Everything visual comes from the `:root` block at the top of `styles.css`.
-Change `--blue` and the site rebrands. Change the `--step-*` values and the
-whole type scale shifts. Do not hardcode colors or sizes below that block,
-because that is what makes a stylesheet impossible to change later.
+That needs a backend and a database, and it is worth waiting until paying
+clients ask for it.

@@ -1,17 +1,25 @@
 /* ==========================================================================
    1. TOKENS
-   Edit these and the whole site changes. Do not hardcode colors or sizes
-   anywhere below this block.
+   Palette is the iColorPalette set: #068cdf, #8ec0e0, #185e55, #063937,
+   #d9cec4. Edit here and the whole site changes. Do not hardcode colors or
+   sizes anywhere below this block.
    ========================================================================== */
 
 :root {
-  --paper:     #ffffff;
-  --band:      #eef1f7;
-  --ink:       #0e1730;
-  --muted:     #5a6683;
-  --line:      #d5dbe7;
-  --blue:      #1f4bff;
-  --blue-dark: #1637c9;
+  --paper: #ffffff;
+  --ink:   #063937;  /* deep teal. body text and dark sections */
+  --teal:  #185e55;
+  --sand:  #d9cec4;  /* warm band background */
+  --sky:   #8ec0e0;  /* light blue. text on dark backgrounds */
+  --blue:  #068cdf;  /* bright accent. rules, numbers, markers */
+
+  /* Darker blue for anything that carries text. #068cdf only hits 3.6:1 on
+     white, which fails for body copy. This one is 7.7:1. */
+  --blue-deep:  #03578b;
+  --blue-press: #02456f;
+
+  --muted: #4d7a75;
+  --line:  #c7d0cd;
 
   --step--1: 0.875rem;
   --step-0:  1.0625rem;
@@ -62,7 +70,7 @@ h3 { font-size: var(--step-1); }
 
 p { margin: 0 0 1em; }
 
-a { color: var(--blue); }
+a { color: var(--blue-deep); }
 
 img { max-width: 100%; height: auto; display: block; }
 
@@ -97,8 +105,15 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .section { padding-block: var(--section-y); }
-.section--band { background: var(--band); }
 .section--tight { padding-block: clamp(2.5rem, 6vw, 4rem); }
+
+/* Warm band. Redefining --line here means borders inside it pick up a warm
+   tone automatically instead of needing their own rules. */
+.section--band {
+  background: var(--sand);
+  --line: #c3b5a7;
+  --muted: #4a5f52;
+}
 
 .prose { max-width: var(--prose); }
 
@@ -117,10 +132,7 @@ img { max-width: 100%; height: auto; display: block; }
    visible immediately, which is the correct fallback.
    ========================================================================== */
 
-.js .reveal {
-  opacity: 0;
-  transform: translateY(1.75rem);
-}
+.js .reveal { opacity: 0; transform: translateY(1.75rem); }
 
 .js .reveal.is-visible {
   opacity: 1;
@@ -203,7 +215,7 @@ img { max-width: 100%; height: auto; display: block; }
   }
   .nav[data-open="true"] { display: flex; }
   .nav a { border-bottom: none; }
-  .nav a[aria-current="page"] { color: var(--blue); }
+  .nav a[aria-current="page"] { color: var(--blue-deep); }
 }
 
 
@@ -221,7 +233,7 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--ink);
 }
 
-.hero--short { min-height: min(48vh, 26rem); }
+.hero--short { min-height: min(46vh, 24rem); }
 
 .hero__media { position: absolute; inset: 0; overflow: clip; }
 
@@ -240,20 +252,17 @@ img { max-width: 100%; height: auto; display: block; }
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(14, 23, 48, 0.88) 0%,
-    rgba(14, 23, 48, 0.55) 45%,
-    rgba(14, 23, 48, 0.25) 100%
+    rgba(6, 57, 55, 0.92) 0%,
+    rgba(6, 57, 55, 0.62) 45%,
+    rgba(6, 57, 55, 0.28) 100%
   );
 }
 
-.hero .wrap {
-  position: relative;
-  padding-block: clamp(3rem, 8vw, 5.5rem);
-}
+.hero .wrap { position: relative; padding-block: clamp(3rem, 8vw, 5.5rem); }
 
 .hero h1 { max-width: 17ch; }
 
-.hero .lede { color: rgba(255, 255, 255, 0.82); }
+.hero .lede { color: var(--sky); }
 
 .hero__actions {
   display: flex;
@@ -264,7 +273,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* The photo drifts as you scroll. Native CSS, no JavaScript, and browsers
-   that do not support it simply show a still image. */
+   without support simply show a still image. */
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
     .hero__media img {
@@ -275,9 +284,7 @@ img { max-width: 100%; height: auto; display: block; }
   }
 }
 
-@keyframes hero-drift {
-  to { transform: translateY(6%); }
-}
+@keyframes hero-drift { to { transform: translateY(6%); } }
 
 .lede {
   max-width: var(--prose);
@@ -289,20 +296,14 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ==========================================================================
    7. PINNED STORY SECTION
-   The image holds still while the text blocks scroll past it. This is the
-   main piece of the flowing scroll.
+   The image holds still while the text blocks scroll past it.
    ========================================================================== */
 
 .pin__inner { display: grid; gap: 2.5rem; align-items: start; }
 
-.pin__media img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
+.pin__media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 
 .pin__blocks { display: grid; gap: 3rem; }
-
 .pin__blocks h3 { margin-bottom: 0.4em; }
 .pin__blocks p { margin: 0; max-width: var(--prose); }
 
@@ -311,7 +312,7 @@ img { max-width: 100%; height: auto; display: block; }
 
   .pin__media { position: sticky; top: 8vh; }
 
-  /* The large gap is what gives the pinned image something to hold for. */
+  /* The large gap gives the pinned image something to hold for. */
   .pin__blocks {
     gap: clamp(6rem, 22vh, 13rem);
     padding-block: clamp(3rem, 10vh, 7rem);
@@ -329,10 +330,14 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 1rem;
 }
 
-.gallery img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+.gallery figure { margin: 0; }
+
+.gallery img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+
+.gallery figcaption {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  color: var(--muted);
 }
 
 
@@ -347,21 +352,21 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 700;
   padding: 0.85rem 1.5rem;
   color: #fff;
-  background: var(--blue);
-  border: 1px solid var(--blue);
+  background: var(--blue-deep);
+  border: 1px solid var(--blue-deep);
   border-radius: var(--radius);
   text-decoration: none;
   cursor: pointer;
-  transition: background 150ms ease;
+  transition: background 150ms ease, border-color 150ms ease;
 }
-.btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
-.btn:focus-visible { outline-color: #fff; }
+.btn:hover { background: var(--blue-press); border-color: var(--blue-press); }
+.btn:focus-visible { outline-color: var(--sky); }
 
 .btn--ghost { color: #fff; background: transparent; border-color: rgba(255, 255, 255, 0.55); }
 .btn--ghost:hover { color: var(--ink); background: #fff; border-color: #fff; }
 
-.btn--outline { color: var(--blue); background: transparent; }
-.btn--outline:hover { color: #fff; background: var(--blue); }
+.btn--outline { color: var(--blue-deep); background: transparent; }
+.btn--outline:hover { color: #fff; background: var(--blue-deep); }
 
 /* --- Facts --- */
 .facts {
@@ -372,6 +377,17 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .facts dt { font-size: var(--step--1); color: var(--muted); }
 .facts dd { margin: 0.2rem 0 0; font-size: var(--step-1); font-weight: 700; }
+
+/* --- Focus areas. What he specializes in. --- */
+.focus {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem 2.5rem;
+}
+
+.focus > div { padding-top: 1rem; border-top: 3px solid var(--blue); }
+.focus h3 { margin-bottom: 0.4em; }
+.focus p { margin: 0; color: var(--muted); }
 
 /* --- Steps --- */
 .steps {
@@ -403,7 +419,7 @@ img { max-width: 100%; height: auto; display: block; }
 .steps h3 { margin-bottom: 0.35em; }
 .steps p { max-width: var(--prose); margin: 0; }
 
-/* --- Pricing --- */
+/* --- Session and plan rows --- */
 .plans { display: grid; gap: 0; }
 
 .plan {
@@ -442,6 +458,15 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--blue);
 }
 
+.plan__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
 @media (min-width: 46rem) {
   .plan { grid-template-columns: 1fr auto; align-items: start; }
   .plan__price { text-align: right; }
@@ -459,7 +484,7 @@ img { max-width: 100%; height: auto; display: block; }
   list-style: none;
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: " +"; color: var(--blue); }
+.faq summary::after { content: " +"; color: var(--blue-deep); }
 .faq details[open] summary::after { content: " \2212"; }
 
 .faq details p { max-width: var(--prose); color: var(--muted); }
@@ -472,7 +497,7 @@ img { max-width: 100%; height: auto; display: block; }
   padding: 1rem;
   color: var(--muted);
   text-align: center;
-  background: var(--band);
+  background: var(--sand);
   border: 1px dashed var(--line);
 }
 .embed iframe { width: 100%; min-height: 38rem; border: 0; }
@@ -491,7 +516,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* --- CTA band --- */
 .cta { color: #fff; background: var(--ink); }
 .cta h2 { max-width: 18ch; }
-.cta p { max-width: var(--prose); color: rgba(255, 255, 255, 0.78); }
+.cta p { max-width: var(--prose); color: var(--sky); }
 
 /* --- Forms --- */
 .field { display: grid; gap: 0.4rem; margin-bottom: 1.25rem; }
@@ -508,13 +533,13 @@ input, textarea, select {
   border-radius: var(--radius);
 }
 textarea { resize: vertical; }
-input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: var(--blue); }
+input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: var(--blue-deep); }
 
 .gotcha { position: absolute; left: -9999px; width: 1px; height: 1px; }
 
 .form-status { margin: 1rem 0 0; font-size: var(--step--1); }
-.form-status[data-state="error"] { color: #b3261e; }
-.form-status[data-state="ok"] { color: #17663d; }
+.form-status[data-state="error"] { color: #a3231c; }
+.form-status[data-state="ok"] { color: #146b4a; }
 
 /* --- Footer --- */
 .footer {

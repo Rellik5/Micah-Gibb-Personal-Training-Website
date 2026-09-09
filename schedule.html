@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Schedule a session | Jordan Reeves Strength</title>
-<meta name="description" content="Book a free first session. Pick a time that works or send a request and I will reply with options.">
+<title>Schedule | Micah Gibb</title>
+<meta name="description" content="Book an intro call, a training session or a check-in.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +17,9 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- ===== SHARED HEADER ===== -->
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <a class="brand" href="index.html">Jordan Reeves</a>
+    <a class="brand" href="index.html">Micah Gibb</a>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html">Home</a>
@@ -32,53 +30,76 @@
     </nav>
   </div>
 </header>
-<!-- ===== END SHARED HEADER ===== -->
 
 <main id="main">
 
   <section class="section">
     <div class="wrap">
-      <h1>Book a session</h1>
+      <h1>Book a time</h1>
       <p class="lede">
-        The first one is free and takes an hour. You will actually train, not
-        sit through a consultation.
+        Three things you can book. If you are new, start with the intro call.
       </p>
     </div>
   </section>
 
   <div class="rule" aria-hidden="true"></div>
 
-  <section class="section section--tight">
+  <!-- ============ WHAT YOU CAN BOOK ============ -->
+  <section class="section">
     <div class="wrap">
-      <ol class="steps">
-        <li class="reveal">
-          <h3>Pick a time</h3>
-          <p>Use the calendar below, or send a request further down if nothing
-             on it works.</p>
-        </li>
-        <li class="reveal" style="--delay: 90ms">
-          <h3>You get a confirmation</h3>
-          <p>With the address, parking, and what to bring. Nothing to fill in
-             beforehand.</p>
-        </li>
-        <li class="reveal" style="--delay: 180ms">
-          <h3>Show up and train</h3>
-          <p>Shoes and water. We will figure out the rest together.</p>
-        </li>
-      </ol>
+      <div class="plans">
+
+        <div class="plan reveal">
+          <div>
+            <p class="plan__meta"><span>Video call</span><span>20 minutes</span><span>New clients</span></p>
+            <h3>Intro call</h3>
+            <p class="plan__blurb">
+              What you are training for, what has and has not worked, and
+              whether I am the right coach for it. No pitch at the end.
+            </p>
+          </div>
+          <p class="plan__price">Free</p>
+        </div>
+
+        <div class="plan reveal">
+          <div>
+            <p class="plan__meta"><span>In person</span><span>[length] minutes</span><span>Everyone</span></p>
+            <h3>Training session</h3>
+            <p class="plan__blurb">
+              A coached session on the floor. Book one at a time or set a
+              standing slot once we have a schedule that works.
+            </p>
+          </div>
+          <p class="plan__price">[$00]</p>
+        </div>
+
+        <div class="plan reveal">
+          <div>
+            <p class="plan__meta"><span>Video call</span><span>30 minutes</span><span>Current clients</span></p>
+            <h3>Check-in</h3>
+            <p class="plan__blurb">
+              Review the last block, look at the numbers and the video, and set
+              the next one. Included with online coaching.
+            </p>
+          </div>
+          <p class="plan__price">Included</p>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- ============ BOOKING CALENDAR ============
-       Paste your Calendly or Acuity embed inside this div and delete the
-       placeholder paragraph. See README for the exact steps. -->
-  <section class="section">
+  <!-- ============ CALENDAR ============
+       Paste the Calendly or Acuity embed inside this div and delete the
+       placeholder paragraph. Embedding the profile page rather than a single
+       event type is what makes all three options above show up here. -->
+  <section class="section section--tight">
     <div class="wrap">
       <h2>Available times</h2>
-      <div class="embed">
+      <div class="embed" id="calendar">
         <p>
           Booking calendar goes here.<br>
-          Paste your Calendly or Acuity embed code into the
+          Paste the Calendly or Acuity embed code into the
           <code>.embed</code> div on this page.
         </p>
       </div>
@@ -92,12 +113,11 @@
         <h2>Nothing on the calendar works?</h2>
         <div class="prose">
           <p>
-            Send me a few windows that do and I will find something. I coach
-            early mornings and evenings on weekdays, plus Saturday mornings.
+            Send a few windows that do and I will find something.
           </p>
           <p>
-            <a href="mailto:hello@jordanreeves.com">hello@jordanreeves.com</a><br>
-            <a href="tel:+19405550142">(940) 555-0142</a>
+            <a href="mailto:[email@example.com]">[email@example.com]</a><br>
+            <a href="tel:[phone number]">[phone number]</a>
           </p>
         </div>
       </div>
@@ -115,23 +135,21 @@
         </div>
 
         <div class="field">
-          <label for="phone">Phone (optional)</label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel">
-        </div>
-
-        <div class="field">
-          <label for="when">When are you usually free?</label>
-          <select id="when" name="when">
-            <option>Weekday mornings</option>
-            <option>Weekday afternoons</option>
-            <option>Weekday evenings</option>
-            <option>Saturday mornings</option>
-            <option>It varies</option>
+          <label for="type">What are you booking?</label>
+          <select id="type" name="type">
+            <option>Intro call</option>
+            <option>Training session</option>
+            <option>Check-in</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="goal">What are you hoping to work on?</label>
+          <label for="when">When are you usually free?</label>
+          <input type="text" id="when" name="when" placeholder="Weekday evenings, Saturday mornings">
+        </div>
+
+        <div class="field">
+          <label for="goal">What are you training for?</label>
           <textarea id="goal" name="goal" rows="4" required></textarea>
         </div>
 
@@ -146,10 +164,9 @@
 
 </main>
 
-<!-- ===== SHARED FOOTER ===== -->
 <footer class="footer">
   <div class="wrap footer__inner">
-    <p>Jordan Reeves Strength, Denton, TX</p>
+    <p>Micah Gibb, [City, Province]</p>
     <nav aria-label="Footer">
       <a href="about.html">About</a>
       <a href="pricing.html">Pricing</a>
@@ -159,7 +176,6 @@
     <p>&copy; <span data-year>2026</span></p>
   </div>
 </footer>
-<!-- ===== END SHARED FOOTER ===== -->
 
 <script src="main.js"></script>
 </body>
