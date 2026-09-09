@@ -4,137 +4,197 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- FILL: appears in the browser tab and in Google results -->
-<title class="todo">[Trainer name] [What they do] [City]</title>
-<meta name="description" content="[One sentence, under 155 characters, that says who this is for]">
+<title>Jordan Reeves | One-on-one strength coaching in Denton, TX</title>
+<meta name="description" content="Private strength coaching for adults who want to get stronger without figuring it out alone. First session is free.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- ============ HEADER ============ -->
+<!-- ===== SHARED HEADER. If you change this, change it in all five pages. ===== -->
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <a class="brand todo" href="#">[Name or business name]</a>
-
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
-
-    <nav class="nav" id="nav">
-      <a href="#work">What I do</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <a class="brand" href="index.html">Jordan Reeves</a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
+<!-- ===== END SHARED HEADER ===== -->
 
 <main id="main">
 
   <!-- ============ HERO ============ -->
-  <!-- One statement. Not a slogan. Say what you do and who for. -->
   <section class="hero">
+    <div class="hero__media">
+      <img src="assets/hero.jpg" alt="The training floor at Jordan Reeves Strength">
+    </div>
     <div class="wrap">
-      <h1 class="todo">[One sentence, 6 to 12 words]</h1>
-      <div class="hero__rule"></div>
-      <p class="lede todo">[Two sentences. Who this is for and what happens first.]</p>
-      <div class="hero__actions">
-        <a class="btn" href="#contact">Book a first session</a>
-      </div>
+      <h1>Get stronger without guessing what to do next.</h1>
+      <p class="lede">
+        I coach one person at a time, in a small private gym in Denton.
+        You show up, I handle the plan, and we adjust it as you go.
+      </p>
+      <p class="hero__actions">
+        <a class="btn" href="schedule.html">Book a free first session</a>
+        <a class="btn btn--ghost" href="pricing.html">See pricing</a>
+      </p>
     </div>
   </section>
 
-  <!-- ============ WHAT I DO ============ -->
-  <!-- Three is a good number. Delete a block if you only have two. -->
-  <section class="section section--band" id="work">
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- ============ FACTS ============ -->
+  <section class="section section--tight">
     <div class="wrap">
-      <h2 class="todo">[Section heading]</h2>
-
-      <div class="grid">
-        <div class="item">
-          <h3 class="todo">[Thing one]</h3>
-          <p class="todo">[Two or three sentences.]</p>
+      <dl class="facts reveal">
+        <div>
+          <dt>Coaching since</dt>
+          <dd>2016</dd>
         </div>
-
-        <div class="item">
-          <h3 class="todo">[Thing two]</h3>
-          <p class="todo">[Two or three sentences.]</p>
+        <div>
+          <dt>Certification</dt>
+          <dd>NSCA-CPT</dd>
         </div>
-
-        <div class="item">
-          <h3 class="todo">[Thing three]</h3>
-          <p class="todo">[Two or three sentences.]</p>
+        <div>
+          <dt>Session length</dt>
+          <dd>55 minutes</dd>
         </div>
-      </div>
+        <div>
+          <dt>Where</dt>
+          <dd>Denton, TX</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
-  <!-- ============ ABOUT ============ -->
-  <section class="section" id="about">
-    <div class="wrap two-col">
-      <div>
-        <h2 class="todo">[Section heading]</h2>
-        <div class="prose">
-          <p class="todo">[Who they are. Plain language.]</p>
-          <p class="todo">[How they got here and why it matters to a client.]</p>
-        </div>
+  <!-- ============ PINNED STORY ============
+       The image sticks while these three blocks scroll past it.
+       Add or remove blocks freely, the effect scales with them. -->
+  <section class="section section--band">
+    <div class="wrap pin__inner">
+
+      <div class="pin__media">
+        <img src="assets/story.jpg" alt="A client working through a set under coaching">
       </div>
 
-      <!-- FILL: real photo of the trainer. Delete this block if there is none. -->
-      <div class="photo todo">[Photo of the trainer]</div>
-    </div>
-  </section>
+      <div class="pin__blocks">
+        <div class="reveal">
+          <h2>No crowd, no waiting</h2>
+          <p>
+            One person on the floor at a time. Nobody is watching you, nobody
+            is waiting for the rack, and you are not competing for space with
+            a class that started ten minutes ago.
+          </p>
+        </div>
 
-  <!-- ============ CONTACT ============ -->
-  <section class="section section--band" id="contact">
-    <div class="wrap two-col">
-      <div>
-        <h2 class="todo">[Section heading]</h2>
-        <div class="prose">
-          <p class="todo">[What happens after someone sends this. Set the expectation.]</p>
-          <p class="contact-direct todo">
-            [email address]<br>
-            [phone number]
+        <div class="reveal">
+          <h3>Everything gets written down</h3>
+          <p>
+            Every set you do is logged. That is how we know whether the plan is
+            working instead of guessing, and it is how you see progress on the
+            weeks when you do not feel it.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <h3>The plan bends around your life</h3>
+          <p>
+            Travel, a bad week of sleep, a shoulder that flares up. None of
+            that means starting over. It means the next session looks a little
+            different.
           </p>
         </div>
       </div>
 
-      <!-- FILL: paste your Formspree endpoint into action= -->
-      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="field">
-          <label for="name">Your name</label>
-          <input type="text" id="name" name="name" autocomplete="name" required>
-        </div>
+    </div>
+  </section>
 
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" required>
-        </div>
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <h2 class="reveal">How it works</h2>
+      <ol class="steps">
+        <li class="reveal">
+          <h3>We talk first</h3>
+          <p>A free 55-minute session. We go through what you want, what your
+             body currently does, and whether we are a fit. No pressure to sign up.</p>
+        </li>
+        <li class="reveal" style="--delay: 90ms">
+          <h3>You get a plan</h3>
+          <p>Built around your schedule and equipment, not a template. Usually
+             two or three sessions a week to start.</p>
+        </li>
+        <li class="reveal" style="--delay: 180ms">
+          <h3>We adjust as you go</h3>
+          <p>When something stops working we change it, and you will always
+             know why.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-        <div class="field">
-          <label for="goal">What are you hoping to work on?</label>
-          <textarea id="goal" name="goal" rows="5" required></textarea>
-        </div>
+  <!-- ============ GALLERY ============ -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="gallery">
+        <img class="reveal" src="assets/gallery-1.jpg" alt="Racks and platforms on the training floor">
+        <img class="reveal" style="--delay: 110ms" src="assets/gallery-2.jpg" alt="A client mid-set on a barbell squat">
+        <img class="reveal" style="--delay: 220ms" src="assets/gallery-3.jpg" alt="Chalk and a loaded barbell">
+      </div>
+    </div>
+  </section>
 
-        <input type="text" name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <!-- ============ PROOF ============ -->
+  <section class="section">
+    <div class="wrap">
+      <figure class="quote reveal">
+        <blockquote>
+          <p>I had written off lifting as something for other people. Eight
+             months in I deadlift more than I weigh and my back stopped hurting.</p>
+        </blockquote>
+        <figcaption>Priya M., client since 2023</figcaption>
+      </figure>
+    </div>
+  </section>
 
-        <button class="btn" type="submit">Send message</button>
-        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-      </form>
+  <!-- ============ CTA ============ -->
+  <section class="section cta">
+    <div class="wrap">
+      <h2>The first session is free and costs you an hour.</h2>
+      <p>Pick a time that works. If it turns out I am not the right coach for
+         you, I will tell you and point you somewhere better.</p>
+      <p><a class="btn" href="schedule.html">Book a time</a></p>
     </div>
   </section>
 
 </main>
 
+<!-- ===== SHARED FOOTER. If you change this, change it in all five pages. ===== -->
 <footer class="footer">
   <div class="wrap footer__inner">
-    <p class="todo">[Business name] [City, State]</p>
-    <p>&copy; <span id="year">2026</span></p>
+    <p>Jordan Reeves Strength, Denton, TX</p>
+    <nav aria-label="Footer">
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p>&copy; <span data-year>2026</span></p>
   </div>
 </footer>
+<!-- ===== END SHARED FOOTER ===== -->
 
 <script src="main.js"></script>
 </body>

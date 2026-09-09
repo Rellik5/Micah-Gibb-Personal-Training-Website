@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Contact | Jordan Reeves Strength</title>
+<meta name="description" content="Get in touch about strength coaching in Denton, TX. Replies within a day.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===== SHARED HEADER ===== -->
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand" href="index.html">Jordan Reeves</a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+<!-- ===== END SHARED HEADER ===== -->
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <h1>Get in touch</h1>
+      <p class="lede">
+        Questions before you book are fine. I reply within a day.
+      </p>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <section class="section">
+    <div class="wrap two-col">
+      <div>
+        <h2>Details</h2>
+        <div class="prose">
+          <p>
+            <a href="mailto:hello@jordanreeves.com">hello@jordanreeves.com</a><br>
+            <a href="tel:+19405550142">(940) 555-0142</a>
+          </p>
+          <p>
+            1234 Example St<br>
+            Denton, TX 76201
+          </p>
+          <p>
+            Weekdays 6am to 11am and 4pm to 8pm.<br>
+            Saturdays 8am to noon.
+          </p>
+          <p>
+            If you already know you want to train,
+            <a href="schedule.html">book a session</a> instead. It is faster.
+          </p>
+        </div>
+      </div>
+
+      <!-- SWAP: your Formspree endpoint goes in action= -->
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="goal">What can I help with?</label>
+          <textarea id="goal" name="goal" rows="6" required></textarea>
+        </div>
+
+        <input type="text" name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="btn" type="submit">Send message</button>
+
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p>Jordan Reeves Strength, Denton, TX</p>
+    <nav aria-label="Footer">
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p>&copy; <span data-year>2026</span></p>
+  </div>
+</footer>
+<!-- ===== END SHARED FOOTER ===== -->
+
+<script src="main.js"></script>
+</body>
+</html>

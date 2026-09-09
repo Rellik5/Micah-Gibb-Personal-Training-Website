@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Schedule a session | Jordan Reeves Strength</title>
+<meta name="description" content="Book a free first session. Pick a time that works or send a request and I will reply with options.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===== SHARED HEADER ===== -->
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand" href="index.html">Jordan Reeves</a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="schedule.html" aria-current="page">Schedule</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<!-- ===== END SHARED HEADER ===== -->
+
+<main id="main">
+
+  <section class="section">
+    <div class="wrap">
+      <h1>Book a session</h1>
+      <p class="lede">
+        The first one is free and takes an hour. You will actually train, not
+        sit through a consultation.
+      </p>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <ol class="steps">
+        <li class="reveal">
+          <h3>Pick a time</h3>
+          <p>Use the calendar below, or send a request further down if nothing
+             on it works.</p>
+        </li>
+        <li class="reveal" style="--delay: 90ms">
+          <h3>You get a confirmation</h3>
+          <p>With the address, parking, and what to bring. Nothing to fill in
+             beforehand.</p>
+        </li>
+        <li class="reveal" style="--delay: 180ms">
+          <h3>Show up and train</h3>
+          <p>Shoes and water. We will figure out the rest together.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ BOOKING CALENDAR ============
+       Paste your Calendly or Acuity embed inside this div and delete the
+       placeholder paragraph. See README for the exact steps. -->
+  <section class="section">
+    <div class="wrap">
+      <h2>Available times</h2>
+      <div class="embed">
+        <p>
+          Booking calendar goes here.<br>
+          Paste your Calendly or Acuity embed code into the
+          <code>.embed</code> div on this page.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REQUEST FORM ============ -->
+  <section class="section section--band">
+    <div class="wrap two-col">
+      <div>
+        <h2>Nothing on the calendar works?</h2>
+        <div class="prose">
+          <p>
+            Send me a few windows that do and I will find something. I coach
+            early mornings and evenings on weekdays, plus Saturday mornings.
+          </p>
+          <p>
+            <a href="mailto:hello@jordanreeves.com">hello@jordanreeves.com</a><br>
+            <a href="tel:+19405550142">(940) 555-0142</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- SWAP: your Formspree endpoint goes in action= -->
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+
+        <div class="field">
+          <label for="when">When are you usually free?</label>
+          <select id="when" name="when">
+            <option>Weekday mornings</option>
+            <option>Weekday afternoons</option>
+            <option>Weekday evenings</option>
+            <option>Saturday mornings</option>
+            <option>It varies</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="goal">What are you hoping to work on?</label>
+          <textarea id="goal" name="goal" rows="4" required></textarea>
+        </div>
+
+        <input type="text" name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button class="btn" type="submit">Send request</button>
+
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== SHARED FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p>Jordan Reeves Strength, Denton, TX</p>
+    <nav aria-label="Footer">
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p>&copy; <span data-year>2026</span></p>
+  </div>
+</footer>
+<!-- ===== END SHARED FOOTER ===== -->
+
+<script src="main.js"></script>
+</body>
+</html>

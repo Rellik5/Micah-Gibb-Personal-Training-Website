@@ -1,7 +1,7 @@
 /* ==========================================================================
    1. TOKENS
-   This is the whole design. Change a value here, it changes everywhere.
-   If you want to move the look, move these numbers first.
+   Edit these and the whole site changes. Do not hardcode colors or sizes
+   anywhere below this block.
    ========================================================================== */
 
 :root {
@@ -31,28 +31,7 @@
 
 
 /* ==========================================================================
-   2. UNFILLED SLOTS
-   Anything still holding placeholder text is marked .todo and shows up
-   yellow. When the site is done there should be no yellow left on the page.
-   Delete this whole block before you ship.
-   ========================================================================== */
-
-.todo {
-  background: #fff6c2;
-  outline: 1px dashed #c9a900;
-  color: #6b5a00;
-}
-
-.photo.todo {
-  display: grid;
-  place-items: center;
-  min-height: 22rem;
-  font-size: var(--step--1);
-}
-
-
-/* ==========================================================================
-   3. BASE
+   2. BASE
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -82,21 +61,20 @@ h2 { font-size: var(--step-3); }
 h3 { font-size: var(--step-1); }
 
 p { margin: 0 0 1em; }
+
 a { color: var(--blue); }
+
 img { max-width: 100%; height: auto; display: block; }
 
-:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 2px;
-}
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 .skip {
   position: absolute;
   left: -9999px;
-  background: var(--ink);
-  color: #fff;
+  z-index: 20;
   padding: 0.75rem 1rem;
-  z-index: 10;
+  color: #fff;
+  background: var(--ink);
 }
 .skip:focus { left: 0; top: 0; }
 
@@ -110,7 +88,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 
 /* ==========================================================================
-   4. LAYOUT
+   3. LAYOUT
    ========================================================================== */
 
 .wrap {
@@ -120,18 +98,39 @@ img { max-width: 100%; height: auto; display: block; }
 
 .section { padding-block: var(--section-y); }
 .section--band { background: var(--band); }
+.section--tight { padding-block: clamp(2.5rem, 6vw, 4rem); }
+
 .prose { max-width: var(--prose); }
 
-.two-col,
-.grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-}
+.two-col { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
 
 @media (min-width: 48rem) {
   .two-col { grid-template-columns: 1fr 1fr; }
-  .grid    { grid-template-columns: repeat(3, 1fr); }
+}
+
+.rule { height: 6px; background: var(--blue); }
+
+
+/* ==========================================================================
+   4. SCROLL BEHAVIOUR
+   Reveals only apply when JavaScript is running. Without it everything is
+   visible immediately, which is the correct fallback.
+   ========================================================================== */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(1.75rem);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; }
 }
 
 
@@ -139,7 +138,12 @@ img { max-width: 100%; height: auto; display: block; }
    5. HEADER
    ========================================================================== */
 
-.masthead { border-bottom: 1px solid var(--line); }
+.masthead {
+  position: relative;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
 
 .masthead__inner {
   display: flex;
@@ -164,8 +168,16 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--muted);
   font-weight: 500;
   text-decoration: none;
+  padding-block: 0.15rem;
+  border-bottom: 2px solid transparent;
 }
 .nav a:hover { color: var(--ink); }
+
+/* Marks the page you are currently on. Set aria-current="page" in the HTML. */
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--blue);
+}
 
 .nav-toggle {
   display: none;
@@ -179,7 +191,7 @@ img { max-width: 100%; height: auto; display: block; }
   cursor: pointer;
 }
 
-@media (max-width: 47.9375rem) {
+@media (max-width: 51.9375rem) {
   .nav-toggle { display: block; }
 
   .nav {
@@ -190,6 +202,8 @@ img { max-width: 100%; height: auto; display: block; }
     padding-bottom: 0.5rem;
   }
   .nav[data-open="true"] { display: flex; }
+  .nav a { border-bottom: none; }
+  .nav a[aria-current="page"] { color: var(--blue); }
 }
 
 
@@ -197,113 +211,324 @@ img { max-width: 100%; height: auto; display: block; }
    6. HERO
    ========================================================================== */
 
-.hero { padding-block: clamp(3rem, 8vw, 6rem) clamp(2.25rem, 6vw, 4rem); }
-.hero h1 { max-width: 16ch; }
-
-.lede {
-  max-width: var(--prose);
-  font-size: var(--step-1);
-  color: var(--muted);
-  line-height: 1.5;
+.hero {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: min(78vh, 44rem);
+  overflow: clip;
+  color: #fff;
+  background: var(--ink);
 }
+
+.hero--short { min-height: min(48vh, 26rem); }
+
+.hero__media { position: absolute; inset: 0; overflow: clip; }
+
+.hero__media img {
+  position: absolute;
+  inset: -9% 0 auto 0;
+  width: 100%;
+  height: 118%;
+  object-fit: cover;
+}
+
+/* Scrim. Without this, white text on a photo is a coin flip. */
+.hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(14, 23, 48, 0.88) 0%,
+    rgba(14, 23, 48, 0.55) 45%,
+    rgba(14, 23, 48, 0.25) 100%
+  );
+}
+
+.hero .wrap {
+  position: relative;
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+}
+
+.hero h1 { max-width: 17ch; }
+
+.hero .lede { color: rgba(255, 255, 255, 0.82); }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 2rem;
+  margin-bottom: 0;
 }
 
-/* The only motion on the page. It runs once on load and never again. */
-.hero__rule {
-  height: 6px;
-  width: 100%;
-  max-width: 8rem;
-  margin-bottom: 1.75rem;
-  background: var(--blue);
-  transform-origin: left;
-  animation: rule-in 700ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+/* The photo drifts as you scroll. Native CSS, no JavaScript, and browsers
+   that do not support it simply show a still image. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__media img {
+      animation: hero-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+  }
 }
 
-@keyframes rule-in {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
+@keyframes hero-drift {
+  to { transform: translateY(6%); }
+}
+
+.lede {
+  max-width: var(--prose);
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--muted);
 }
 
 
 /* ==========================================================================
-   7. COMPONENTS
+   7. PINNED STORY SECTION
+   The image holds still while the text blocks scroll past it. This is the
+   main piece of the flowing scroll.
    ========================================================================== */
 
+.pin__inner { display: grid; gap: 2.5rem; align-items: start; }
+
+.pin__media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.pin__blocks { display: grid; gap: 3rem; }
+
+.pin__blocks h3 { margin-bottom: 0.4em; }
+.pin__blocks p { margin: 0; max-width: var(--prose); }
+
+@media (min-width: 52rem) {
+  .pin__inner { grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+  .pin__media { position: sticky; top: 8vh; }
+
+  /* The large gap is what gives the pinned image something to hold for. */
+  .pin__blocks {
+    gap: clamp(6rem, 22vh, 13rem);
+    padding-block: clamp(3rem, 10vh, 7rem);
+  }
+}
+
+
+/* ==========================================================================
+   8. GALLERY
+   ========================================================================== */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+
+/* ==========================================================================
+   9. COMPONENTS
+   ========================================================================== */
+
+/* --- Buttons --- */
 .btn {
   display: inline-block;
+  font: inherit;
+  font-weight: 700;
   padding: 0.85rem 1.5rem;
-  font-weight: 600;
   color: #fff;
   background: var(--blue);
-  border: 0;
+  border: 1px solid var(--blue);
   border-radius: var(--radius);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
   text-decoration: none;
+  cursor: pointer;
+  transition: background 150ms ease;
 }
-.btn:hover { background: var(--blue-dark); }
+.btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+.btn:focus-visible { outline-color: #fff; }
 
-.item p { color: var(--muted); }
+.btn--ghost { color: #fff; background: transparent; border-color: rgba(255, 255, 255, 0.55); }
+.btn--ghost:hover { color: var(--ink); background: #fff; border-color: #fff; }
 
-.photo {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+.btn--outline { color: var(--blue); background: transparent; }
+.btn--outline:hover { color: #fff; background: var(--blue); }
+
+/* --- Facts --- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1.75rem;
+  margin: 0;
+}
+.facts dt { font-size: var(--step--1); color: var(--muted); }
+.facts dd { margin: 0.2rem 0 0; font-size: var(--step-1); font-weight: 700; }
+
+/* --- Steps --- */
+.steps {
+  display: grid;
+  gap: 2.25rem;
+  max-width: 46rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
 }
 
-.field { margin-bottom: 1.25rem; }
+.steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1.25rem;
+  counter-increment: step;
+}
 
-.field label {
+.steps li::before {
+  content: counter(step);
+  font-size: var(--step-2);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.steps h3 { margin-bottom: 0.35em; }
+.steps p { max-width: var(--prose); margin: 0; }
+
+/* --- Pricing --- */
+.plans { display: grid; gap: 0; }
+
+.plan {
+  display: grid;
+  gap: 1rem 2rem;
+  padding-block: 2.25rem;
+  border-top: 1px solid var(--line);
+}
+.plan:last-child { border-bottom: 1px solid var(--line); }
+
+.plan h3 { margin-bottom: 0.3em; }
+.plan__blurb { max-width: var(--prose); color: var(--muted); }
+
+.plan__price { font-size: var(--step-2); font-weight: 800; white-space: nowrap; }
+.plan__price span {
   display: block;
-  margin-bottom: 0.4rem;
   font-size: var(--step--1);
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--muted);
 }
 
-.field input,
-.field textarea {
+.plan__includes { margin: 0; padding: 0; list-style: none; }
+.plan__includes li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.35rem;
+  font-size: var(--step--1);
+}
+.plan__includes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.6rem;
+  height: 2px;
+  background: var(--blue);
+}
+
+@media (min-width: 46rem) {
+  .plan { grid-template-columns: 1fr auto; align-items: start; }
+  .plan__price { text-align: right; }
+}
+
+/* --- FAQ --- */
+.faq { max-width: 46rem; }
+
+.faq details { border-bottom: 1px solid var(--line); }
+
+.faq summary {
+  padding-block: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: " +"; color: var(--blue); }
+.faq details[open] summary::after { content: " \2212"; }
+
+.faq details p { max-width: var(--prose); color: var(--muted); }
+
+/* --- Booking embed --- */
+.embed {
+  display: grid;
+  place-items: center;
+  min-height: 40rem;
+  padding: 1rem;
+  color: var(--muted);
+  text-align: center;
+  background: var(--band);
+  border: 1px dashed var(--line);
+}
+.embed iframe { width: 100%; min-height: 38rem; border: 0; }
+
+/* --- Quote --- */
+.quote { max-width: 30rem; margin: 0; }
+.quote blockquote { margin: 0; }
+.quote p {
+  font-size: var(--step-2);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.quote figcaption { font-size: var(--step--1); color: var(--muted); }
+
+/* --- CTA band --- */
+.cta { color: #fff; background: var(--ink); }
+.cta h2 { max-width: 18ch; }
+.cta p { max-width: var(--prose); color: rgba(255, 255, 255, 0.78); }
+
+/* --- Forms --- */
+.field { display: grid; gap: 0.4rem; margin-bottom: 1.25rem; }
+
+label { font-size: var(--step--1); font-weight: 600; }
+
+input, textarea, select {
   width: 100%;
-  padding: 0.75rem 0.9rem;
   font: inherit;
-  color: var(--ink);
+  padding: 0.7rem 0.8rem;
+  color: inherit;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
+textarea { resize: vertical; }
+input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: var(--blue); }
 
-.gotcha { position: absolute; left: -9999px; }
+.gotcha { position: absolute; left: -9999px; width: 1px; height: 1px; }
 
-.form-status {
-  margin-top: 0.9rem;
-  font-size: var(--step--1);
-  color: var(--muted);
-}
+.form-status { margin: 1rem 0 0; font-size: var(--step--1); }
+.form-status[data-state="error"] { color: #b3261e; }
+.form-status[data-state="ok"] { color: #17663d; }
 
-.contact-direct { font-weight: 600; }
-
-
-/* ==========================================================================
-   8. FOOTER
-   ========================================================================== */
-
+/* --- Footer --- */
 .footer {
-  border-top: 1px solid var(--line);
-  padding-block: 2rem;
+  padding-block: 2.5rem;
   font-size: var(--step--1);
   color: var(--muted);
+  border-top: 1px solid var(--line);
 }
-
 .footer__inner {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1rem;
 }
-
 .footer p { margin: 0; }
+.footer a { color: var(--muted); }
+.footer nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
